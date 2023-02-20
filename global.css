@@ -13,6 +13,7 @@
 
 * {
     font-family: 'ROKAF', sans-serif;
+    box-sizing: border-box;
 }
 
 html {
@@ -21,26 +22,14 @@ html {
     overflow-x: hidden;
 }
 
-/* Classes */
-
-.text-stroke {
-    -webkit-text-stroke: 2px #fff;
-}
-
-.text-stroke-light {
-    -webkit-text-stroke: 2px #000;
-}
-
-.text-stroke-1 {
-    -webkit-text-stroke: 1px #fff;
-}
-
-.text-stroke-light-1 {
-    -webkit-text-stroke: 1px #000;
-}
-
-.word-spacing {
-    word-spacing: 3px;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Scroll styles */
@@ -59,4 +48,27 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #414851;
+}
+
+/* key */
+
+.key {
+    height: calc(var(--width) * 4);
+    width: var(--width);
+    position: relative;
+    border-radius: 5px;
+}
+
+.black {
+    margin-left: calc(var(--width) / -2);
+    margin-right: calc(var(--width) / -2);
+    z-index: 2;
+}
+
+.var-width-4vw {
+    --width: 4vw;
+}
+
+.var-width-2-5vw {
+    --width: 2.5vw;
 }
