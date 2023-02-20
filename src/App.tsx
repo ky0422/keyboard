@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Components from './components'
 
-const App: React.FC = (props) => (
+const App: React.FC = () => (
     <div className='flex'>
         <Components.Keyboard octave={3} />
         <Components.Keyboard octave={4} />
