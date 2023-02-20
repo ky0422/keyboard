@@ -28,5 +28,5 @@
         "vite": "^3.0.0"
     },
     "types": "./global.d.ts",
-    "homepage": "."
+    "homepage": "https://ky0422.github.io/keyboard/"
 }
