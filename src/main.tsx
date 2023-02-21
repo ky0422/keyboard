@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ThemeProvider>
             <Components.Background />
             <div className='m-0 min-h-[100vh] flex justify-center content-center w-[100%] h-[100%] flex-col items-center'>
-                {/* <p className='text-black'>test</p> */}
+                <p className='text-black'>test</p>
                 <App />
             </div>
         </ThemeProvider>
