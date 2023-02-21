@@ -53,7 +53,7 @@ html {
 .black {
     margin-left: calc(var(--width) / -2);
     margin-right: calc(var(--width) / -2);
-    z-index: 2;
+    z-index: 1;
 }
 
 .var-width-4vw {
