@@ -14,6 +14,11 @@
 * {
     font-family: 'ROKAF', sans-serif;
     box-sizing: border-box;
+    z-index: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 html {
@@ -47,13 +52,13 @@ html {
     width: var(--width);
     position: relative;
     border-radius: 5px;
-    z-index: 0;
+    z-index: 1;
 }
 
 .black {
     margin-left: calc(var(--width) / -2);
     margin-right: calc(var(--width) / -2);
-    z-index: 1;
+    z-index: 2;
 }
 
 .var-width-4vw {

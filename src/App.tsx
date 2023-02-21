@@ -3,9 +3,9 @@ import * as Components from './components'
 
 const App: React.FC = () => (
     <div className='flex'>
-        <Components.Keyboard octave={3} />
-        <Components.Keyboard octave={4} />
-        <Components.Keyboard octave={5} />
+        <Components.Keyboard.default octave={3} />
+        <Components.Keyboard.default octave={4} />
+        <Components.Keyboard.default octave={5} />
     </div>
 )
 
