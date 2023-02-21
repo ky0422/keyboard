@@ -32,7 +32,7 @@ export default ({ octave }: Props) => {
     ]
 
     return (
-        <div className='flex'>
+        <div className='flex py-4'>
             {keys.map((key, index) => {
                 const note = key.note == 'C' ? `${key.note}${octave}` : `${key.note}`
                 return <Key key={index} type={key.type} note={`${key.note}${octave}`} text={note} />
