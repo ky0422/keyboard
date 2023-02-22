@@ -4,7 +4,8 @@ import { Theme, ThemeContext } from './context/theme'
 
 const App: React.FC = () => {
     const { toggle, toggleTheme } = React.useContext(ThemeContext) as Theme
-    const setShowNoteName = Components.showNoteName((state) => state.toggleShowNoteName)
+    const { toggleNoteVisibility } = Components.useNoteVisibility()
+    const { setVolume } = Components.useVolumeStore()
 
     return (
         <div>
@@ -12,13 +13,14 @@ const App: React.FC = () => {
                 <Components.Toggle onClick={toggleTheme} toggle={toggle} className='pr-5'>
                     <Components.Span>{toggle ? 'Dark' : 'Light'}</Components.Span>
                 </Components.Toggle>
-                <Components.Toggle onClick={setShowNoteName} className='pr-5'>
+                <Components.Toggle onClick={toggleNoteVisibility} className='pr-5'>
                     <Components.Span>Show note names</Components.Span>
                 </Components.Toggle>
                 <Components.Range
                     options={{
                         defaultValue: 100,
                     }}
+                    onChange={(e) => setVolume(Number(e.target.value))}
                 >
                     <Components.Span>Volume</Components.Span>
                 </Components.Range>

@@ -11,7 +11,7 @@ interface Note {
     flat: string
 }
 
-const notes = [
+const notes: Array<Note> = [
     { sharp: 'C', flat: 'C' },
     { sharp: 'C#', flat: 'Db' },
     { sharp: 'D', flat: 'D' },
