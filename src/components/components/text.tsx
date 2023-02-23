@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { MouseEventHandler, PropsWithChildren } from 'react'
+import { Theme, ThemeContext } from '../../context/theme'
+import { MouseEventHandler, PropsWithChildren, useContext } from 'react'
 
 interface Props {
     onClick?: MouseEventHandler<HTMLElement>
@@ -16,8 +17,14 @@ export const useNoteVisibility = create<State>((set) => ({
     toggleNoteVisibility: () => set((state) => ({ noteVisibility: !state.noteVisibility })),
 }))
 
-export default ({ children, onClick, className }: PropsWithChildren<Props>) => (
-    <div className={`text-[0px] lg:text-base text-stone-400 absolute bottom-1 left-[50%] translate-x-[-50%] bg-transparent ${className}`} onClick={onClick}>
-        {useNoteVisibility().noteVisibility ? children : null}
-    </div>
-)
+export default ({ children, onClick, className }: PropsWithChildren<Props>) => {
+    const { toggle } = useContext(ThemeContext) as Theme
+
+    return (
+        <div className={`text-[0px] lg:text-base absolute bottom-1 left-[50%] translate-x-[-50%] bg-transparent ${className} ${
+            toggle ? 'text-stone-600' : 'text-stone-400'
+        }`} onClick={onClick}>
+            {useNoteVisibility().noteVisibility ? children : null}
+        </div>
+    )
+}
