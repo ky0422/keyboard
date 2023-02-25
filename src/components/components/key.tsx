@@ -102,10 +102,10 @@ const keyBinds = (octave: number): Array<KeyBind> => [
     { key: '[', note: `F${octave + 1}` },
     { key: '=', note: `F#${octave + 1}` },
     { key: ']', note: `G${octave + 1}` },
-    { key: '.', note: `G#${octave + 1}` },
-    { key: ';', note: `A${octave + 1}` },
-    { key: '/', note: `A#${octave + 1}` },
-    { key: "'", note: `B${octave + 1}` },
+    { key: 'l', note: `G#${octave + 1}` },
+    { key: '.', note: `A${octave + 1}` },
+    { key: ';', note: `A#${octave + 1}` },
+    { key: '/', note: `B${octave + 1}` },
 ]
 
 export default ({ type, note, text }: Props) => {
