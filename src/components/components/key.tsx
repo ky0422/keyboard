@@ -33,17 +33,27 @@ const playNote = (note: string, volume: number): Promise<void> =>
         audio.addEventListener('ended', () => resolve())
     })
 
+const w_old_b = 'bg-zinc-300'
+const w_old_w = 'bg-background-light'
+const w_pressed_b = 'bg-zinc-400'
+const w_pressed_w = 'bg-zinc-200'
+
+const b_old_b = 'bg-zinc-800'
+const b_old_w = 'bg-black'
+const b_pressed_b = 'bg-zinc-900'
+const b_pressed_w = 'bg-zinc-700'
+
 const onWhiteClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, toggle: boolean, volume: number) => {
-    const old = toggle ? 'bg-zinc-300' : 'bg-background-light'
-    const pressed = toggle ? 'bg-zinc-400' : 'bg-zinc-200'
+    const old = toggle ? w_old_b : w_old_w
+    const pressed = toggle ? w_pressed_b : w_pressed_w
 
     replaceClass(e.target as HTMLElement, old, pressed)
     playNote((e.target as HTMLElement).dataset.note as string, volume).then(() => replaceClass(e.target as HTMLElement, pressed, old))
 }
 
 const onBlackClick = (e: React.MouseEvent<HTMLElement, MouseEvent>, toggle: boolean, volume: number) => {
-    const old = toggle ? 'bg-zinc-800' : 'bg-black'
-    const pressed = toggle ? 'bg-zinc-900' : 'bg-zinc-700'
+    const old = toggle ? b_old_b : b_old_w
+    const pressed = toggle ? b_pressed_b : b_pressed_w
 
     replaceClass(e.target as HTMLElement, old, pressed)
     playNote((e.target as HTMLElement).dataset.note as string, volume).then(() => replaceClass(e.target as HTMLElement, pressed, old))
@@ -54,12 +64,12 @@ const onTextClick = (e: React.MouseEvent<HTMLElement, MouseEvent>, note: string)
     ;(document.getElementById(`${note}Key`) as HTMLDivElement).click()
 }
 
-interface KeyDown {
+interface KeyBind {
     key: string
     note: string
 }
 
-const keydown = (octave: number): Array<KeyDown> => [
+const keyBinds = (octave: number): Array<KeyBind> => [
     { key: 'z', note: `C${octave - 1}` },
     { key: 's', note: `C#${octave - 1}` },
     { key: 'x', note: `D${octave - 1}` },
@@ -103,18 +113,32 @@ export default ({ type, note, text }: Props) => {
     const volume = useVolumeStore((state) => state.volume / 100)
 
     useEffect(() => {
-        const callback = (e: KeyboardEvent) => {
+        const keydown = (e: KeyboardEvent) => {
             if (e.repeat) return
-            const key = keydown(4).find((k) => k.key === e.key)
+            const key = keyBinds(4).find((k) => k.key === e.key)
             if (key) {
                 const element = document.getElementById(`${key.note}Key`) as HTMLDivElement
                 element.click()
             }
         }
-        document.addEventListener('keydown', callback)
+        document.addEventListener('keydown', keydown)
+
+        const keyup = (e: KeyboardEvent) => {
+            const key = keyBinds(4).find((k) => k.key === e.key)
+            if (key) {
+                const element = document.getElementById(`${key.note}Key`) as HTMLDivElement
+
+                if (element.classList.contains(w_pressed_b)) replaceClass(element, w_pressed_b, w_old_b)
+                if (element.classList.contains(w_pressed_w)) replaceClass(element, w_pressed_w, w_old_w)
+                if (element.classList.contains(b_pressed_b)) replaceClass(element, b_pressed_b, b_old_b)
+                if (element.classList.contains(b_pressed_w)) replaceClass(element, b_pressed_w, b_old_w)
+            }
+        }
+        document.addEventListener('keyup', keyup)
 
         return () => {
-            document.removeEventListener('keydown', callback)
+            document.removeEventListener('keydown', keydown)
+            document.removeEventListener('keyup', keyup)
         }
     })
 
