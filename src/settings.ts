@@ -18,7 +18,7 @@ export type Store = Prefix<SetterStates, 'set', true> & Prefix<TogglerStates, 't
 export const useSettingsStore = create<Store>((set) => ({
     defaultOctave: 4,
     volume: 100,
-    noteVisibility: true,
+    noteVisibility: false,
     setDefaultOctave: (octave: number) => set({ defaultOctave: octave }),
     setVolume: (volume: number) => set({ volume: volume }),
     toggleNoteVisibility: () => set((state) => ({ noteVisibility: !state.noteVisibility })),
