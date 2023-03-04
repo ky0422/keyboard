@@ -1,8 +1,8 @@
 import React from 'react'
 import { Theme, ThemeContext } from '../../context/theme'
+import { PropsBase } from '..'
 
-interface Props {
-    className?: string
+interface Props extends PropsBase {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
     options?: {
         min?: number

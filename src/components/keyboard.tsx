@@ -1,7 +1,7 @@
 import * as Components from '.'
 import Key from './components/key'
 
-interface Props extends Partial<Components.PropsBase> {
+interface Props extends Components.PropsBase {
     octave: number
 }
 

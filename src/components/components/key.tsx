@@ -2,22 +2,13 @@ import React, { useEffect } from 'react'
 import { create } from 'zustand'
 import { KeyText, PropsBase, Keyboard } from '..'
 import { Theme, ThemeContext } from '../../context/theme'
+import { useSettingsStore } from '../../settings'
 
 interface Props extends Partial<PropsBase> {
     type: Keyboard.KeyType
     note: string
     text?: string
 }
-
-interface State {
-    volume: number
-    setVolume: (volume: number) => void
-}
-
-export const useVolumeStore = create<State>((set) => ({
-    volume: 100,
-    setVolume: (volume: number) => set({ volume }),
-}))
 
 const replaceClass = (e: HTMLElement, className: string, newClass: string) => {
     e.classList.remove(className)
@@ -110,12 +101,12 @@ const keyBinds = (octave: number): Array<KeyBind> => [
 
 export default ({ type, note, text }: Props) => {
     const { toggle } = React.useContext(ThemeContext) as Theme
-    const volume = useVolumeStore((state) => state.volume / 100)
+    const [volume, defaultOctave] = useSettingsStore((state) => [state.volume / 100, state.defaultOctave])
 
     useEffect(() => {
         const keydown = (e: KeyboardEvent) => {
             if (e.repeat) return
-            const key = keyBinds(4).find((k) => k.key === e.key)
+            const key = keyBinds(defaultOctave).find((k) => k.key === e.key)
             if (key) {
                 const element = document.getElementById(`${key.note}Key`) as HTMLDivElement
                 element.click()

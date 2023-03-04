@@ -1,11 +1,11 @@
 import React from 'react'
 import { MouseEventHandler, PropsWithChildren } from 'react'
 import { Theme, ThemeContext } from '../../context/theme'
+import { PropsBase } from '..'
 
-interface Props {
+interface Props extends PropsBase {
     onClick?: MouseEventHandler<HTMLElement>
     toggle?: boolean
-    className?: string
 }
 
 export default ({ children, onClick, toggle, className }: PropsWithChildren<Props>) => {
