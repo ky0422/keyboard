@@ -115,7 +115,7 @@ export default ({ type, note, text }: Props) => {
         document.addEventListener('keydown', keydown)
 
         const keyup = (e: KeyboardEvent) => {
-            const key = keyBinds(4).find((k) => k.key === e.key)
+            const key = keyBinds(defaultOctave).find((k) => k.key === e.key)
             if (key) {
                 const element = document.getElementById(`${key.note}Key`) as HTMLDivElement
 
